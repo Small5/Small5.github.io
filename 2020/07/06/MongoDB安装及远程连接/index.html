@@ -19,10 +19,14 @@
 <meta property="og:site_name" content="PatrickYoung Blog">
 <meta property="og:description" content="今天在实验室服务器上安装测试了redis和mongodb并测试，现介绍一下mongodb的过程。 安装配置1、安装MongoDB    apt-get install mongodb2、安装好后执行mongo进入数据库命令行    mongo3、查看数据库，和MySQL类似    show dbs">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-08T13:02:31.478Z">
+<meta property="og:image" content="https://small5.github.io/2020/07/06/MongoDB安装及远程连接/asset/mongo-1.png">
+<meta property="og:image" content="https://small5.github.io/2020/07/06/MongoDB安装及远程连接/asset/mongo-2.png">
+<meta property="og:image" content="https://small5.github.io/2020/07/06/MongoDB安装及远程连接/asset/mongo-3.png">
+<meta property="og:updated_time" content="2020-07-08T13:07:13.153Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu18.04安装MongoDB并使用compass远程连接">
 <meta name="twitter:description" content="今天在实验室服务器上安装测试了redis和mongodb并测试，现介绍一下mongodb的过程。 安装配置1、安装MongoDB    apt-get install mongodb2、安装好后执行mongo进入数据库命令行    mongo3、查看数据库，和MySQL类似    show dbs">
+<meta name="twitter:image" content="https://small5.github.io/2020/07/06/MongoDB安装及远程连接/asset/mongo-1.png">
 
     
     <link rel="alternative" href="https://github.com/Small5" title="PatrickYoung Blog" type="application/atom+xml">
@@ -105,10 +109,10 @@
 <p>db.createUser(<br>… {<br>… user: “Small5”,<br>… pwd:”123456”,<br>… .roles: [{role: “dbAdmin”, db: “myNewDatabase”}]<br>… }<br>… )<br>6、插入一条记录<br>    <code>db.myCollection.insertOne({X : 1})</code><br>7、编辑配置文件，注释绑定本地ip,开启远程连接。<br><code>sudo vi /etc/mongodb.conf</code><br>    <code>#bind ip = 127.0.0.1</code></p>
 </blockquote>
 <h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><p>1、<a href="https://www.mongodb.com/try/download/compass" target="_blank" rel="noopener">官网</a>下载安装compass<br>2、打开新建连接</p>
-<div class="image-size-200"><br><br></div><br><div class="image-size-200"><br><br></div><br>3、即可可视化查看并操作数据库内容<br><div class="image-size-200"><br><br></div>
-
-
-
+<p><img src="./asset/mongo-1.png" alt="compass连接" style="zoom:60%;"></p>
+<p><img src="./asset/mongo-2.png" alt="compass连接" style="zoom:60%;"></p>
+<p>3、即可可视化查看并操作数据库内容</p>
+<p><img src="./asset/mongo-3.png" alt="compass连接" style="zoom:60%;"></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -189,15 +193,15 @@
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/NoSQL/" title="NoSQL">NoSQL<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/专注大脑/" title="专注大脑">专注大脑<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/语言学习/" title="语言学习">语言学习<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/NoSQL/" title="NoSQL">NoSQL<sup>1</sup></a></li>
 			
 		
 			
