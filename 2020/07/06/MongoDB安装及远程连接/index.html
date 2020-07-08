@@ -4,27 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>如何提高linux服务器安全性 | PatrickYoung Blog</title>
+    <title>ubuntu18.04安装MongoDB并使用compass远程连接 | PatrickYoung Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Young">
     
 
     
-    <meta name="description" content="服务器遭到远程连接暴力破解,当时可以采取哪些紧急措施,后续又应该如何加强安全性">
-<meta name="keywords" content="linux">
+    <meta name="description" content="今天在实验室服务器上安装测试了redis和mongodb并测试，现介绍一下mongodb的过程。 安装配置1、安装MongoDB    apt-get install mongodb2、安装好后执行mongo进入数据库命令行    mongo3、查看数据库，和MySQL类似    show dbs4、新建数据库，直接use，不存在则会新建    use myNewDatabase5、添加用户，其中">
+<meta name="keywords" content="NoSQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何提高linux服务器安全性">
-<meta property="og:url" content="https://small5.github.io/2020/03/11/如何提高linux服务器安全性/index.html">
+<meta property="og:title" content="ubuntu18.04安装MongoDB并使用compass远程连接">
+<meta property="og:url" content="https://small5.github.io/2020/07/06/MongoDB安装及远程连接/index.html">
 <meta property="og:site_name" content="PatrickYoung Blog">
-<meta property="og:description" content="服务器遭到远程连接暴力破解,当时可以采取哪些紧急措施,后续又应该如何加强安全性">
+<meta property="og:description" content="今天在实验室服务器上安装测试了redis和mongodb并测试，现介绍一下mongodb的过程。 安装配置1、安装MongoDB    apt-get install mongodb2、安装好后执行mongo进入数据库命令行    mongo3、查看数据库，和MySQL类似    show dbs4、新建数据库，直接use，不存在则会新建    use myNewDatabase5、添加用户，其中">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://small5.github.io/2020/03/11/如何提高linux服务器安全性/linux_1.jpg">
-<meta property="og:updated_time" content="2020-03-11T08:49:02.000Z">
+<meta property="og:updated_time" content="2020-07-08T12:57:17.223Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何提高linux服务器安全性">
-<meta name="twitter:description" content="服务器遭到远程连接暴力破解,当时可以采取哪些紧急措施,后续又应该如何加强安全性">
-<meta name="twitter:image" content="https://small5.github.io/2020/03/11/如何提高linux服务器安全性/linux_1.jpg">
+<meta name="twitter:title" content="ubuntu18.04安装MongoDB并使用compass远程连接">
+<meta name="twitter:description" content="今天在实验室服务器上安装测试了redis和mongodb并测试，现介绍一下mongodb的过程。 安装配置1、安装MongoDB    apt-get install mongodb2、安装好后执行mongo进入数据库命令行    mongo3、查看数据库，和MySQL类似    show dbs4、新建数据库，直接use，不存在则会新建    use myNewDatabase5、添加用户，其中">
 
     
     <link rel="alternative" href="https://github.com/Small5" title="PatrickYoung Blog" type="application/atom+xml">
@@ -79,14 +77,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2020/03/11/如何提高linux服务器安全性/" title="如何提高linux服务器安全性" itemprop="url">如何提高linux服务器安全性</a>
+      <a href="/2020/07/06/MongoDB安装及远程连接/" title="ubuntu18.04安装MongoDB并使用compass远程连接" itemprop="url">ubuntu18.04安装MongoDB并使用compass远程连接</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
 		
   </p><p class="article-time">
-    <time datetime="2020-03-11T08:29:45.000Z" itemprop="datePublished"> Published 2020-03-11</time>
+    <time datetime="2020-07-06T11:29:45.000Z" itemprop="datePublished"> Published 2020-07-06</time>
     
   </p>
 </header>
@@ -95,14 +93,19 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装配置"><span class="toc-number">1.</span> <span class="toc-text">安装配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程连接"><span class="toc-number">2.</span> <span class="toc-text">远程连接</span></a></li></ol>
 		
 		</div>
 		
-		<p>服务器遭到远程连接暴力破解,当时可以采取哪些紧急措施,后续又应该如何加强安全性<br><a id="more"></a></p>
-<div class="image-size-200"><br><img src="/2020/03/11/如何提高linux服务器安全性/linux_1.jpg" title="木马入侵通知"><br></div>
-
-
+		<p>今天在实验室服务器上安装测试了redis和mongodb并测试，现介绍一下mongodb的过程。</p>
+<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><p>1、安装MongoDB<br>    <code>apt-get install mongodb</code><br>2、安装好后执行mongo进入数据库命令行<br>    mongo<br>3、查看数据库，和MySQL类似<br>    <code>show dbs</code><br>4、新建数据库，直接use，不存在则会新建<br>    <code>use myNewDatabase</code><br>5、添加用户，其中role字段有几种参数，可以参考官方文档具体了解  </p>
+<blockquote>
+<p>db.createUser(<br>… {<br>… user: “Small5”,<br>… pwd:”123456”,<br>… .roles: [{role: “dbAdmin”, db: “myNewDatabase”}]<br>… }<br>… )<br>6、插入一条记录<br>    <code>db.myCollection.insertOne({X : 1})</code><br>7、编辑配置文件，注释绑定本地ip,开启远程连接。<br><code>sudo vi /etc/mongodb.conf</code><br>    <code>#bind ip = 127.0.0.1</code></p>
+</blockquote>
+<h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><p>1、<a href="https://www.mongodb.com/try/download/compass" target="_blank" rel="noopener">官网</a>下载安装compass<br>2、打开新建连接</p>
+<p><div class="image-size-200"><br><br></div></p>
+<p><div class="image-size-200"><br><br></div><br>3、即可可视化查看并操作数据库内容</p>
+<p><div class="image-size-200"><br><br></div><br><a id="more"></a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -111,7 +114,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/linux/">linux</a>
+  <span></span> <a href="/tags/NoSQL/">NoSQL</a>
   </div>
 
 </div>
@@ -120,7 +123,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://small5.github.io/2020/03/11/如何提高linux服务器安全性/" data-title="如何提高linux服务器安全性 | PatrickYoung Blog" data-tsina="" class="share clearfix">
+	  <div data-url="https://small5.github.io/2020/07/06/MongoDB安装及远程连接/" data-title="ubuntu18.04安装MongoDB并使用compass远程连接 | PatrickYoung Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -133,20 +136,20 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev">
- <a href="/2020/03/16/实验计划/" title="对对的实验计划">
-  <strong>上一篇：</strong><br>
-  <span>
-  对对的实验计划</span>
+
+<div class="next">
+<a href="/2020/07/06/Redis安装及简要介绍/" title="Redis安装及简要介绍">
+ <strong>下一篇：</strong><br> 
+ <span>Redis安装及简要介绍
+</span>
 </a>
 </div>
-
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2020/03/11/如何提高linux服务器安全性/" data-title="如何提高linux服务器安全性" data-url="https://small5.github.io/2020/03/11/如何提高linux服务器安全性/"></div>
+	<div class="ds-thread" data-thread-key="2020/07/06/MongoDB安装及远程连接/" data-title="ubuntu18.04安装MongoDB并使用compass远程连接" data-url="https://small5.github.io/2020/07/06/MongoDB安装及远程连接/"></div>
 </section>
 
 
@@ -158,7 +161,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装配置"><span class="toc-number">1.</span> <span class="toc-text">安装配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程连接"><span class="toc-number">2.</span> <span class="toc-text">远程连接</span></a></li></ol>
  
   </div>
 
