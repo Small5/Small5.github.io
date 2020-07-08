@@ -77,6 +77,281 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2020/07/06/Redis安装及简要介绍/" title="Redis学习" itemprop="url">Redis学习</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
+		
+  </p><p class="article-time">
+    <time datetime="2020-07-06T08:29:45.000Z" itemprop="datePublished"> Published 2020-07-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Redis安装"><a href="#Redis安装" class="headerlink" title="Redis安装"></a>Redis安装</h1><h2 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h2><p>直接输入命令 <code>sudo apt-get install redis-server</code><br>安装完成后，Redis服务器会自动启动。<br>使用<code>ps -aux|grep redis</code>命令可以看到服务器系统进程默认端口6379</p>
+<p>使用<code>netstat -nlt|grep 6379</code>命令可以看到redis服务器状态</p>
+<p>使用<code>sudo /etc/init.d/redis-server status</code>命令可以看到Redis服务器状态</p>
+<h2 id="离线安装："><a href="#离线安装：" class="headerlink" title="离线安装："></a>离线安装：</h2><p>下载：打开redis官方网站，推荐下载稳定版本(stable)</p>
+<pre><code>wget http://download.redis.io/releases/redis-5.0.5.tar.gz
+</code></pre><p>解压<code>tar xzf redis-5.0.5.tar.gz</code><br>复制：推荐放到usr/local下<code>sudo mv redis-5.0.5 /usr/local/redis</code><br>进入redis目录 <code>cd /usr/local/redis/</code><br>生成:<code>sudo make</code>，失败则 使用 <code>sudo make MALLOC=libc</code>后再<code>sudo make</code><br>测试 <code>sudo make test</code> 这段运行时间会较长<br>安装：将redis的命令安装到<code>/usr/bin/</code>目录<code>sudo make install</code><br>运行 <code>redis-server</code> 按ctrl+c停止<br>Redis安装 配置服务器 启动客户端 数据操作 发布订阅 主从配置 卸载Redis</p>
+<h2 id="Redis服务器基本配置"><a href="#Redis服务器基本配置" class="headerlink" title="Redis服务器基本配置"></a>Redis服务器基本配置</h2><p>配置文件为<em>/etc/redis/redis.conf</em>(在线安装推荐)或者 <em>/usr/local/redis/redis.conf</em>(手动安装)</p>
+<p>首先<code>sudo vi /etc/redis/redis.conf</code><br>添加Redis的访问账号<br>Redis服务器默认是不需要密码的，假设设置密码为test。<br>去掉requirepass 前面的注释#，在后面添加密码<br>requirepass hzlarm</p>
+<p>开启Redis的远程连接<br>注释掉绑定地址 #bind 127.0.0.1</p>
+<p>修改Redis的默认端口<br>port 6379</p>
+<p>Redis以守护进程运行<br>如果以守护进程运行，则不会在命令行阻塞，类似于服务<br>如果以非守护进程运行，则当前终端被阻塞，无法使用<br>推荐改为yes，以守护进程运行<br>daemonize no|yes<br>Redis的数据文件<br>dbfilename dump.rdb</p>
+<p>数据文件存储路径<br>dir /var/lib/redis</p>
+<p>配置完成后重新启动服务器<br>sudo service redis-server restart</p>
+<p>启动客户端<br>安装Redis服务器，会自动地一起安装Redis命令行客户端程序。命令行输入 <code>redis-cli</code> 如果设置了密码<code>hzlarmredis-cli -a test</code><br>常用命令： Redis命令不区分大小写<br>ping返回PONG表示畅通<br>help 命令行的帮助<br>quit 或者Ctrl+d或者Ctrl+c退出<br>键的命令</p>
+<p>查找键，参数支持正则KEYS pattern例如keys *查看所有的key列表<br>判断键是否存在，如果存在返回1，不存在返回0EXISTS key [key …]<br>查看键对应的value的类型TYPE key<br>删除键及对应的值DEL key [key …]<br>设置过期时间，以秒为单位<br>创建时没有设置过期时间则一直存在，直到使用使用DEL移除EXPIRE key seconds<br>查看有效时间，以秒为单位TTL key<br>修改 key 的名称RENAME key newkey</p>
+<h2 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h2><p>redis是key-value的数据，所以每个数据都是一个键值对<br>键的类型是字符串<br>值的类型分为五种：<br>1.字符串string<br>2.哈希hash<br>3.列表list<br>4.集合set<br>5.有序集合zset</p>
+<p>string是redis最基本的类型,一个 key 对应一个 value<br>最大能存储512MB数据<br>string类型是二进制安全的，即可以为任何数据，比如数字、图片、序列化对象等<br>数据操作的全部命令，可以查看<a href="http://redis.cn/commands.html" target="_blank" rel="noopener">中文网站</a></p>
+<h2 id="卸载redis"><a href="#卸载redis" class="headerlink" title="卸载redis"></a>卸载redis</h2><p>redis这么神奇，为什么要卸载它？？？</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Redis/">Redis</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2020/07/06/Redis安装及简要介绍/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/07/06/Redis安装及简要介绍/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2020/07/06/流域可持续发展项目回顾/" title="hhs项目复习" itemprop="url">hhs项目复习</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
+		
+  </p><p class="article-time">
+    <time datetime="2020-07-06T08:29:45.000Z" itemprop="datePublished"> Published 2020-07-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>SSM应用框架复习<br>
+        
+        
+        </p><p class="article-more-link">
+          
+            <a href="/2020/07/06/流域可持续发展项目回顾/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Javaweb/">Javaweb</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2020/07/06/流域可持续发展项目回顾/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/07/06/流域可持续发展项目回顾/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2020/06/30/README/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
+		
+  </p><p class="article-time">
+    <time datetime="2020-06-30T13:57:51.000Z" itemprop="datePublished"> Published 2020-06-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h1><blockquote>
+<p>A minimal (less than 30 lines of expanded CSS) old-looking modern theme for Typora</p>
+</blockquote>
+<p><img src="preview.png" alt=""><br><img src="source.png" alt=""></p>
+<h2 id="Fonts"><a href="#Fonts" class="headerlink" title="Fonts"></a>Fonts</h2><ul>
+<li>Futura</li>
+<li>Palatino</li>
+<li>Victor Mono/Courier New</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2020/06/30/README/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/06/30/README/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2020/06/30/interface/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
+		
+  </p><p class="article-time">
+    <time datetime="2020-06-30T13:57:51.000Z" itemprop="datePublished"> Published 2020-06-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        #typora-sidebar, body {
+    background-color: #fffffc;
+}
+
+#typora-sidebar, h1, h2, h3 {
+    font-family: 'Futura', sans-serif;
+}
+
+body {
+    font-family: 'Palatino', serif;
+    padding: 4em;
+    margin: auto;
+    max-width: 60ch;
+}
+
+h1, h2, h3, a {
+    color: #468;
+}
+
+code, pre, .md-fences, #typora-source {
+    background-color: #f6f6f6;
+    font-family: 'Victor Mono', 'Courier New', monospace;
+}
+
+blockquote {
+    border-left: 4px solid #abb;
+    padding-left: 16px;
+}
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2020/06/30/interface/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/06/30/interface/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2020/04/01/DailyLanguage/" title="【语言练习】" itemprop="url">【语言练习】</a>
   </h1>
   <p class="article-author">By
@@ -218,15 +493,15 @@
     <div class="article-content">
         
         <h3 id="嗨皮用"><a href="#嗨皮用" class="headerlink" title="嗨皮用"></a><strong>嗨皮用</strong></h3>
-    <div id="aplayer-aBKneZhR" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="5232474" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
+    <div id="aplayer-SuoeDUQA" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="5232474" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
 <h3 id="呼呼用"><a href="#呼呼用" class="headerlink" title="呼呼用"></a><strong>呼呼用</strong></h3>
-    <div id="aplayer-bMbcxBQY" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="16411018" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
+    <div id="aplayer-hSfAwuzl" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="16411018" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
 <hr>
 <h3 id="发呆用"><a href="#发呆用" class="headerlink" title="发呆用"></a><strong>发呆用</strong></h3>
-    <div id="aplayer-iUVJrlLd" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1319472837" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
+    <div id="aplayer-AxihyhcR" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1319472837" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
 <hr>
 <h3 id="读书用"><a href="#读书用" class="headerlink" title="读书用"></a><strong>读书用</strong></h3>
-    <div id="aplayer-MbMBlKal" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1391792576" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
+    <div id="aplayer-ddNiUOwW" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1391792576" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
 
         
         
@@ -419,7 +694,11 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Javaweb/" title="Javaweb">Javaweb<sup>1</sup></a></li>
 			
 		
 			
@@ -430,6 +709,10 @@
 				<li><a href="/tags/科研/" title="科研">科研<sup>1</sup></a></li>
 			
 		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
+			
+		
 		</ul>
 </div>
 
@@ -437,7 +720,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">Archives</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">4</span></li></ul>
   </div>
 
 
