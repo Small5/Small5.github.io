@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="在线安装直接输入命令 sudo apt-get install redis-server">
+    <meta name="description" content="在线安装直接输入命令 sudo apt-get install redis-server 安装完成后，Redis服务器会自动启动。使用ps -aux|grep redis命令可以看到服务器系统进程默认端口6379 使用netstat -nlt|grep 6379命令可以看到redis服务器状态 使用sudo /etc/init.d/redis-server status命令可以看到Redis服务器">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis安装及简要介绍">
 <meta property="og:url" content="https://small5.github.io/2020/07/06/Redis安装及简要介绍/index.html">
 <meta property="og:site_name" content="PatrickYoung Blog">
-<meta property="og:description" content="在线安装直接输入命令 sudo apt-get install redis-server">
+<meta property="og:description" content="在线安装直接输入命令 sudo apt-get install redis-server 安装完成后，Redis服务器会自动启动。使用ps -aux|grep redis命令可以看到服务器系统进程默认端口6379 使用netstat -nlt|grep 6379命令可以看到redis服务器状态 使用sudo /etc/init.d/redis-server status命令可以看到Redis服务器">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-08T09:02:38.400Z">
+<meta property="og:updated_time" content="2020-07-08T09:03:58.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis安装及简要介绍">
-<meta name="twitter:description" content="在线安装直接输入命令 sudo apt-get install redis-server">
+<meta name="twitter:description" content="在线安装直接输入命令 sudo apt-get install redis-server 安装完成后，Redis服务器会自动启动。使用ps -aux|grep redis命令可以看到服务器系统进程默认端口6379 使用netstat -nlt|grep 6379命令可以看到redis服务器状态 使用sudo /etc/init.d/redis-server status命令可以看到Redis服务器">
 
     
     <link rel="alternative" href="https://github.com/Small5" title="PatrickYoung Blog" type="application/atom+xml">
@@ -98,11 +98,10 @@
 		</div>
 		
 		<h2 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h2><p>直接输入命令 <code>sudo apt-get install redis-server</code></p>
-<a id="more"></a>
 <p>安装完成后，Redis服务器会自动启动。<br>使用<code>ps -aux|grep redis</code>命令可以看到服务器系统进程默认端口6379</p>
 <p>使用<code>netstat -nlt|grep 6379</code>命令可以看到redis服务器状态</p>
 <p>使用<code>sudo /etc/init.d/redis-server status</code>命令可以看到Redis服务器状态</p>
-<!---more--->
+<a id="more"></a>
 <h2 id="离线安装："><a href="#离线安装：" class="headerlink" title="离线安装："></a>离线安装：</h2><p>下载：打开redis官方网站，推荐下载稳定版本(stable)</p>
 <pre><code>wget http://download.redis.io/releases/redis-5.0.5.tar.gz
 </code></pre><p>解压<code>tar xzf redis-5.0.5.tar.gz</code><br>复制：推荐放到usr/local下<code>sudo mv redis-5.0.5 /usr/local/redis</code><br>进入redis目录 <code>cd /usr/local/redis/</code><br>生成:<code>sudo make</code>，失败则 使用 <code>sudo make MALLOC=libc</code>后再<code>sudo make</code><br>测试 <code>sudo make test</code> 这段运行时间会较长<br>安装：将redis的命令安装到<code>/usr/bin/</code>目录<code>sudo make install</code><br>运行 <code>redis-server</code> 按ctrl+c停止<br>Redis安装 配置服务器 启动客户端 数据操作 发布订阅 主从配置 卸载Redis</p>
