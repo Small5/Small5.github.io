@@ -4,25 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>Redis学习 | PatrickYoung Blog</title>
+    <title>Redis安装及简要介绍 | PatrickYoung Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Young">
     
 
     
-    <meta name="description" content="Redis安装在线安装直接输入命令 sudo apt-get install redis-server">
+    <meta name="description" content="在线安装直接输入命令 sudo apt-get install redis-server">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis学习">
+<meta property="og:title" content="Redis安装及简要介绍">
 <meta property="og:url" content="https://small5.github.io/2020/07/06/Redis安装及简要介绍/index.html">
 <meta property="og:site_name" content="PatrickYoung Blog">
-<meta property="og:description" content="Redis安装在线安装直接输入命令 sudo apt-get install redis-server">
+<meta property="og:description" content="在线安装直接输入命令 sudo apt-get install redis-server">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-08T08:59:10.918Z">
+<meta property="og:updated_time" content="2020-07-08T09:00:37.804Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis学习">
-<meta name="twitter:description" content="Redis安装在线安装直接输入命令 sudo apt-get install redis-server">
+<meta name="twitter:title" content="Redis安装及简要介绍">
+<meta name="twitter:description" content="在线安装直接输入命令 sudo apt-get install redis-server">
 
     
     <link rel="alternative" href="https://github.com/Small5" title="PatrickYoung Blog" type="application/atom+xml">
@@ -77,7 +77,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2020/07/06/Redis安装及简要介绍/" title="Redis学习" itemprop="url">Redis学习</a>
+      <a href="/2020/07/06/Redis安装及简要介绍/" title="Redis安装及简要介绍" itemprop="url">Redis安装及简要介绍</a>
   </h1>
   <p class="article-author">By
        
@@ -93,15 +93,16 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis安装"><span class="toc-number">1.</span> <span class="toc-text">Redis安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在线安装"><span class="toc-number">1.1.</span> <span class="toc-text">在线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#离线安装："><span class="toc-number">1.2.</span> <span class="toc-text">离线安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis服务器基本配置"><span class="toc-number">1.3.</span> <span class="toc-text">Redis服务器基本配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据操作"><span class="toc-number">1.4.</span> <span class="toc-text">数据操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#卸载redis"><span class="toc-number">1.5.</span> <span class="toc-text">卸载redis</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在线安装"><span class="toc-number">1.</span> <span class="toc-text">在线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#离线安装："><span class="toc-number">2.</span> <span class="toc-text">离线安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis服务器基本配置"><span class="toc-number">3.</span> <span class="toc-text">Redis服务器基本配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据操作"><span class="toc-number">4.</span> <span class="toc-text">数据操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#卸载redis"><span class="toc-number">5.</span> <span class="toc-text">卸载redis</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="Redis安装"><a href="#Redis安装" class="headerlink" title="Redis安装"></a>Redis安装</h1><h2 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h2><p>直接输入命令 <code>sudo apt-get install redis-server</code></p>
+		<h2 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h2><p>直接输入命令 <code>sudo apt-get install redis-server</code></p>
 <a id="more"></a>
 <p>安装完成后，Redis服务器会自动启动。<br>使用<code>ps -aux|grep redis</code>命令可以看到服务器系统进程默认端口6379</p>
 <p>使用<code>netstat -nlt|grep 6379</code>命令可以看到redis服务器状态</p>
 <p>使用<code>sudo /etc/init.d/redis-server status</code>命令可以看到Redis服务器状态</p>
+<!---more--->
 <h2 id="离线安装："><a href="#离线安装：" class="headerlink" title="离线安装："></a>离线安装：</h2><p>下载：打开redis官方网站，推荐下载稳定版本(stable)</p>
 <pre><code>wget http://download.redis.io/releases/redis-5.0.5.tar.gz
 </code></pre><p>解压<code>tar xzf redis-5.0.5.tar.gz</code><br>复制：推荐放到usr/local下<code>sudo mv redis-5.0.5 /usr/local/redis</code><br>进入redis目录 <code>cd /usr/local/redis/</code><br>生成:<code>sudo make</code>，失败则 使用 <code>sudo make MALLOC=libc</code>后再<code>sudo make</code><br>测试 <code>sudo make test</code> 这段运行时间会较长<br>安装：将redis的命令安装到<code>/usr/bin/</code>目录<code>sudo make install</code><br>运行 <code>redis-server</code> 按ctrl+c停止<br>Redis安装 配置服务器 启动客户端 数据操作 发布订阅 主从配置 卸载Redis</p>
@@ -133,7 +134,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://small5.github.io/2020/07/06/Redis安装及简要介绍/" data-title="Redis学习 | PatrickYoung Blog" data-tsina="" class="share clearfix">
+	  <div data-url="https://small5.github.io/2020/07/06/Redis安装及简要介绍/" data-title="Redis安装及简要介绍 | PatrickYoung Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -159,7 +160,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2020/07/06/Redis安装及简要介绍/" data-title="Redis学习" data-url="https://small5.github.io/2020/07/06/Redis安装及简要介绍/"></div>
+	<div class="ds-thread" data-thread-key="2020/07/06/Redis安装及简要介绍/" data-title="Redis安装及简要介绍" data-url="https://small5.github.io/2020/07/06/Redis安装及简要介绍/"></div>
 </section>
 
 
@@ -171,7 +172,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis安装"><span class="toc-number">1.</span> <span class="toc-text">Redis安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在线安装"><span class="toc-number">1.1.</span> <span class="toc-text">在线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#离线安装："><span class="toc-number">1.2.</span> <span class="toc-text">离线安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis服务器基本配置"><span class="toc-number">1.3.</span> <span class="toc-text">Redis服务器基本配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据操作"><span class="toc-number">1.4.</span> <span class="toc-text">数据操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#卸载redis"><span class="toc-number">1.5.</span> <span class="toc-text">卸载redis</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在线安装"><span class="toc-number">1.</span> <span class="toc-text">在线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#离线安装："><span class="toc-number">2.</span> <span class="toc-text">离线安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis服务器基本配置"><span class="toc-number">3.</span> <span class="toc-text">Redis服务器基本配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据操作"><span class="toc-number">4.</span> <span class="toc-text">数据操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#卸载redis"><span class="toc-number">5.</span> <span class="toc-text">卸载redis</span></a></li></ol>
  
   </div>
 
@@ -196,6 +197,10 @@
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/语言学习/" title="语言学习">语言学习<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/专注大脑/" title="专注大脑">专注大脑<sup>1</sup></a></li>
 			
 		
@@ -204,7 +209,7 @@
 			
 		
 			
-				<li><a href="/tags/语言学习/" title="语言学习">语言学习<sup>1</sup></a></li>
+				<li><a href="/tags/科研/" title="科研">科研<sup>1</sup></a></li>
 			
 		
 			
@@ -213,10 +218,6 @@
 		
 			
 				<li><a href="/tags/Javaweb/" title="Javaweb">Javaweb<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/科研/" title="科研">科研<sup>1</sup></a></li>
 			
 		
 			
