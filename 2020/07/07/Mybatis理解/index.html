@@ -4,25 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>Mybatis理解 | PatrickYoung Blog</title>
+    <title>Mybatis实践理解 | PatrickYoung Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Young">
     
 
     
-    <meta name="description" content="Mybatis介绍What is it? MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。">
+    <meta name="description" content="What is it? MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。">
 <meta name="keywords" content="SSM框架">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis理解">
+<meta property="og:title" content="Mybatis实践理解">
 <meta property="og:url" content="https://small5.github.io/2020/07/07/Mybatis理解/index.html">
 <meta property="og:site_name" content="PatrickYoung Blog">
-<meta property="og:description" content="Mybatis介绍What is it? MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。">
+<meta property="og:description" content="What is it? MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-31T00:28:37.406Z">
+<meta property="og:updated_time" content="2020-07-31T00:30:51.827Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis理解">
-<meta name="twitter:description" content="Mybatis介绍What is it? MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。">
+<meta name="twitter:title" content="Mybatis实践理解">
+<meta name="twitter:description" content="What is it? MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。">
 
     
     <link rel="alternative" href="https://github.com/Small5" title="PatrickYoung Blog" type="application/atom+xml">
@@ -77,7 +77,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2020/07/07/Mybatis理解/" title="Mybatis理解" itemprop="url">Mybatis理解</a>
+      <a href="/2020/07/07/Mybatis理解/" title="Mybatis实践理解" itemprop="url">Mybatis实践理解</a>
   </h1>
   <p class="article-author">By
        
@@ -93,11 +93,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mybatis介绍"><span class="toc-number">1.</span> <span class="toc-text">Mybatis介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-it"><span class="toc-number">1.1.</span> <span class="toc-text">What is it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-we-use-it"><span class="toc-number">1.2.</span> <span class="toc-text">Why we use it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-use-it"><span class="toc-number">1.3.</span> <span class="toc-text">How to use it?</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-it"><span class="toc-number">1.</span> <span class="toc-text">What is it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-we-use-it"><span class="toc-number">2.</span> <span class="toc-text">Why we use it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-use-it"><span class="toc-number">3.</span> <span class="toc-text">How to use it?</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="Mybatis介绍"><a href="#Mybatis介绍" class="headerlink" title="Mybatis介绍"></a>Mybatis介绍</h1><h2 id="What-is-it"><a href="#What-is-it" class="headerlink" title="What is it?"></a>What is it?</h2><blockquote>
+		<h2 id="What-is-it"><a href="#What-is-it" class="headerlink" title="What is it?"></a>What is it?</h2><blockquote>
 <p>MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。</p>
 </blockquote>
 <a id="more"></a>
@@ -177,7 +177,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://small5.github.io/2020/07/07/Mybatis理解/" data-title="Mybatis理解 | PatrickYoung Blog" data-tsina="" class="share clearfix">
+	  <div data-url="https://small5.github.io/2020/07/07/Mybatis理解/" data-title="Mybatis实践理解 | PatrickYoung Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -203,7 +203,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2020/07/07/Mybatis理解/" data-title="Mybatis理解" data-url="https://small5.github.io/2020/07/07/Mybatis理解/"></div>
+	<div class="ds-thread" data-thread-key="2020/07/07/Mybatis理解/" data-title="Mybatis实践理解" data-url="https://small5.github.io/2020/07/07/Mybatis理解/"></div>
 </section>
 
 
@@ -215,7 +215,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mybatis介绍"><span class="toc-number">1.</span> <span class="toc-text">Mybatis介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-it"><span class="toc-number">1.1.</span> <span class="toc-text">What is it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-we-use-it"><span class="toc-number">1.2.</span> <span class="toc-text">Why we use it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-use-it"><span class="toc-number">1.3.</span> <span class="toc-text">How to use it?</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-it"><span class="toc-number">1.</span> <span class="toc-text">What is it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-we-use-it"><span class="toc-number">2.</span> <span class="toc-text">Why we use it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-use-it"><span class="toc-number">3.</span> <span class="toc-text">How to use it?</span></a></li></ol>
  
   </div>
 
@@ -240,6 +240,14 @@
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/NoSQL/" title="NoSQL">NoSQL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SSM框架/" title="SSM框架">SSM框架<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/语言学习/" title="语言学习">语言学习<sup>1</sup></a></li>
 			
 		
@@ -248,19 +256,7 @@
 			
 		
 			
-				<li><a href="/tags/NoSQL/" title="NoSQL">NoSQL<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Redis/" title="Redis">Redis<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SSM框架/" title="SSM框架">SSM框架<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Javaweb/" title="Javaweb">Javaweb<sup>1</sup></a></li>
 			
 		
 			
@@ -269,6 +265,10 @@
 		
 			
 				<li><a href="/tags/科研/" title="科研">科研<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Javaweb/" title="Javaweb">Javaweb<sup>1</sup></a></li>
 			
 		
 			
