@@ -4,20 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>PatrickYoung Blog</title>
+    <title>Mybatis理解 | PatrickYoung Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Young">
     
 
     
-    <meta property="og:type" content="website">
-<meta property="og:title" content="PatrickYoung Blog">
-<meta property="og:url" content="https://small5.github.io/index.html">
+    <meta name="description" content="Mybatis介绍What is it? MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。  Why we use it?对比一下">
+<meta name="keywords" content="SSM框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis理解">
+<meta property="og:url" content="https://small5.github.io/2020/07/07/Mybatis理解/index.html">
 <meta property="og:site_name" content="PatrickYoung Blog">
+<meta property="og:description" content="Mybatis介绍What is it? MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。  Why we use it?对比一下">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-31T00:24:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PatrickYoung Blog">
+<meta name="twitter:title" content="Mybatis理解">
+<meta name="twitter:description" content="Mybatis介绍What is it? MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。  Why we use it?对比一下">
 
     
     <link rel="alternative" href="https://github.com/Small5" title="PatrickYoung Blog" type="application/atom+xml">
@@ -27,9 +32,6 @@
     
     
     <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/assets/css/APlayer.min.css" class="aplayer-style-marker">
-<script src="/assets/js/APlayer.min.js" class="aplayer-script-marker"></script>
-<script src="/assets/js/Meting.min.js" class="meting-script-marker"></script>
 </head>
 </html>
   <body>
@@ -69,12 +71,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2020/07/07/Mybatis理解/" title="Mybatis理解" itemprop="url">Mybatis理解</a>
@@ -88,9 +88,16 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <h1 id="Mybatis介绍"><a href="#Mybatis介绍" class="headerlink" title="Mybatis介绍"></a>Mybatis介绍</h1><h2 id="What-is-it"><a href="#What-is-it" class="headerlink" title="What is it?"></a>What is it?</h2><blockquote>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mybatis介绍"><span class="toc-number">1.</span> <span class="toc-text">Mybatis介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-it"><span class="toc-number">1.1.</span> <span class="toc-text">What is it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-we-use-it"><span class="toc-number">1.2.</span> <span class="toc-text">Why we use it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-use-it"><span class="toc-number">1.3.</span> <span class="toc-text">How to use it?</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Mybatis介绍"><a href="#Mybatis介绍" class="headerlink" title="Mybatis介绍"></a>Mybatis介绍</h1><h2 id="What-is-it"><a href="#What-is-it" class="headerlink" title="What is it?"></a>What is it?</h2><blockquote>
 <p>MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。是一个基于Java的持久层框架，无论是Mybatis、Hibernate都是ORM的一种实现框架，都是对JDBC的一种封装。</p>
 </blockquote>
 <h2 id="Why-we-use-it"><a href="#Why-we-use-it" class="headerlink" title="Why we use it?"></a>Why we use it?</h2><p>对比一下我们在持久层学的几种技术</p>
@@ -152,14 +159,9 @@
 <li>关闭资源</li>
 </ul>
 <p>关于Mybatis还有很多技术点，慢慢复习与总结。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
@@ -172,584 +174,49 @@
 
 
 
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://small5.github.io/2020/07/07/Mybatis理解/" data-title="Mybatis理解 | PatrickYoung Blog" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
 
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2020/07/07/Mybatis理解/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/07/07/Mybatis理解/" data-count-type="comments">&nbsp;</a>
-	
-</div>
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/07/06/MongoDB安装及远程连接/" title="ubuntu18.04安装MongoDB并使用compass远程连接" itemprop="url">ubuntu18.04安装MongoDB并使用compass远程连接</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
-		
-  </p><p class="article-time">
-    <time datetime="2020-07-06T11:29:45.000Z" itemprop="datePublished"> Published 2020-07-06</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>今天在实验室服务器上安装测试了redis和mongodb并测试，现介绍一下mongodb的过程。</p>
-<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><p>1、安装MongoDB<br>    <code>apt-get install mongodb</code><br>2、安装好后执行mongo进入数据库命令行<br>    mongo<br>3、查看数据库，和MySQL类似<br>    <code>show dbs</code>  </p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2020/07/06/MongoDB安装及远程连接/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/NoSQL/">NoSQL</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
+   	       
+	</article>
 	
-	  	<span></span>
-		<a href="/2020/07/06/MongoDB安装及远程连接/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/07/06/MongoDB安装及远程连接/" data-count-type="comments">&nbsp;</a>
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2020/07/06/MongoDB安装及远程连接/" title="ubuntu18.04安装MongoDB并使用compass远程连接">
+ <strong>下一篇：</strong><br> 
+ <span>ubuntu18.04安装MongoDB并使用compass远程连接
+</span>
+</a>
+</div>
+
+</nav>
+
 	
-</div>
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2020/07/07/Mybatis理解/" data-title="Mybatis理解" data-url="https://small5.github.io/2020/07/07/Mybatis理解/"></div>
+</section>
 
-</footer>
 
 
-    </article>
 
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/07/06/Redis安装及简要介绍/" title="Redis安装及简要介绍" itemprop="url">Redis安装及简要介绍</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
-		
-  </p><p class="article-time">
-    <time datetime="2020-07-06T08:29:45.000Z" itemprop="datePublished"> Published 2020-07-06</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h2><p>直接输入命令 <code>sudo apt-get install redis-server</code></p>
-<p>安装完成后，Redis服务器会自动启动。<br>使用<code>ps -aux|grep redis</code>命令可以看到服务器系统进程默认端口6379</p>
-<p>使用<code>netstat -nlt|grep 6379</code>命令可以看到redis服务器状态</p>
-<p>使用<code>sudo /etc/init.d/redis-server status</code>命令可以看到Redis服务器状态</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2020/07/06/Redis安装及简要介绍/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Redis/">Redis</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2020/07/06/Redis安装及简要介绍/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/07/06/Redis安装及简要介绍/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/07/06/流域可持续发展项目回顾/" title="hhs项目复习" itemprop="url">hhs项目复习</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
-		
-  </p><p class="article-time">
-    <time datetime="2020-07-06T08:29:45.000Z" itemprop="datePublished"> Published 2020-07-06</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>SSM应用框架复习<br>
-        
-        
-        </p><p class="article-more-link">
-          
-            <a href="/2020/07/06/流域可持续发展项目回顾/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Javaweb/">Javaweb</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2020/07/06/流域可持续发展项目回顾/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/07/06/流域可持续发展项目回顾/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/06/30/README/" title="" itemprop="url"></a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
-		
-  </p><p class="article-time">
-    <time datetime="2020-06-30T13:57:51.000Z" itemprop="datePublished"> Published 2020-06-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h1><blockquote>
-<p>A minimal (less than 30 lines of expanded CSS) old-looking modern theme for Typora</p>
-</blockquote>
-<p><img src="preview.png" alt=""><br><img src="source.png" alt=""></p>
-<h2 id="Fonts"><a href="#Fonts" class="headerlink" title="Fonts"></a>Fonts</h2><ul>
-<li>Futura</li>
-<li>Palatino</li>
-<li>Victor Mono/Courier New</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2020/06/30/README/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/06/30/README/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/04/01/DailyLanguage/" title="【语言练习】" itemprop="url">【语言练习】</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
-		
-  </p><p class="article-time">
-    <time datetime="2020-04-01T14:25:36.000Z" itemprop="datePublished"> Published 2020-04-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <blockquote>
-<p>一种语言，一种灵魂<br>现实不变，思维可炼</p>
-</blockquote>
-<h2 id="2020-04-09"><a href="#2020-04-09" class="headerlink" title="2020-04-09 "></a><strong>2020-04-09 </strong></h2><h3 id="韩语"><a href="#韩语" class="headerlink" title="韩语"></a>韩语</h3><p><a href="https://www.cctalk.com/v/14893883250366?sid=1542645131777840" target="_blank" rel="noopener">高冷</a></p>
-<h3 id="日语"><a href="#日语" class="headerlink" title="日语"></a>日语</h3><p><a href="https://zhidao.baidu.com/question/689378302240794844.html" target="_blank" rel="noopener">高冷</a></p>
-<h3 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h3><p><a href="http://bj.xdf.cn/publish/portal24/tab18734/info857352.htm" target="_blank" rel="noopener">高冷</a></p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2020/04/01/DailyLanguage/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/语言学习/">语言学习</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2020/04/01/DailyLanguage/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/04/01/DailyLanguage/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/03/24/码农计划/" title="对对的码农计划(日更)" itemprop="url">对对的码农计划(日更)</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
-		
-  </p><p class="article-time">
-    <time datetime="2020-03-24T14:02:29.000Z" itemprop="datePublished"> Published 2020-03-24</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <blockquote>
-<p>任何事情都有一个流程<br>整个世界都是一个程序<br>而我们是做程序的 </p>
-</blockquote>
-<h2 id="2020-04-09"><a href="#2020-04-09" class="headerlink" title="2020-04-09 "></a><strong>2020-04-09 </strong></h2><h3 id="基础技能"><a href="#基础技能" class="headerlink" title="基础技能"></a>基础技能</h3><p>算法题目（35min）<br><a href="https://leetcode-cn.com/problems/generate-parentheses/" target="_blank" rel="noopener">括号生成</a></p>
-<p>算法（30min）<br><a href="https://www.cnblogs.com/linhaostudy/p/10544917.html" target="_blank" rel="noopener">动态链接1</a></p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2020/03/24/码农计划/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2020/03/24/码农计划/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/03/24/码农计划/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/03/16/Mindfulness/" title="Mindfulness For Fan" itemprop="url">Mindfulness For Fan</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
-		
-  </p><p class="article-time">
-    <time datetime="2020-03-16T14:13:28.000Z" itemprop="datePublished"> Published 2020-03-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="嗨皮用"><a href="#嗨皮用" class="headerlink" title="嗨皮用"></a><strong>嗨皮用</strong></h3>
-    <div id="aplayer-vRyveCWd" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="5232474" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
-<h3 id="呼呼用"><a href="#呼呼用" class="headerlink" title="呼呼用"></a><strong>呼呼用</strong></h3>
-    <div id="aplayer-dzHbrzwO" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="16411018" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
-<hr>
-<h3 id="发呆用"><a href="#发呆用" class="headerlink" title="发呆用"></a><strong>发呆用</strong></h3>
-    <div id="aplayer-UBBQWqPX" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1319472837" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
-<hr>
-<h3 id="读书用"><a href="#读书用" class="headerlink" title="读书用"></a><strong>读书用</strong></h3>
-    <div id="aplayer-idtiWunI" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1391792576" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/专注大脑/">专注大脑</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2020/03/16/Mindfulness/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/03/16/Mindfulness/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/03/16/实验计划/" title="对对的实验计划" itemprop="url">对对的实验计划</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
-		
-  </p><p class="article-time">
-    <time datetime="2020-03-16T14:05:30.000Z" itemprop="datePublished"> Published 2020-03-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <blockquote>
-<p>你的进展太慢了</p>
-</blockquote>
-<h2 id="03-21-03-23"><a href="#03-21-03-23" class="headerlink" title="03/21-03/23 "></a><strong>03/21-03/23 </strong></h2><p>修改程序</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2020/03/16/实验计划/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/科研/">科研</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2020/03/16/实验计划/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/03/16/实验计划/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/03/11/如何提高linux服务器安全性/" title="如何提高linux服务器安全性" itemprop="url">如何提高linux服务器安全性</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
-		
-  </p><p class="article-time">
-    <time datetime="2020-03-11T08:29:45.000Z" itemprop="datePublished"> Published 2020-03-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>服务器遭到远程连接暴力破解,当时可以采取哪些紧急措施,后续又应该如何加强安全性<br>
-        
-        
-        </p><p class="article-more-link">
-          
-            <a href="/2020/03/11/如何提高linux服务器安全性/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/linux/">linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2020/03/11/如何提高linux服务器安全性/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/03/11/如何提高linux服务器安全性/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mybatis介绍"><span class="toc-number">1.</span> <span class="toc-text">Mybatis介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-it"><span class="toc-number">1.1.</span> <span class="toc-text">What is it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-we-use-it"><span class="toc-number">1.2.</span> <span class="toc-text">Why we use it?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-use-it"><span class="toc-number">1.3.</span> <span class="toc-text">How to use it?</span></a></li></ol></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
@@ -908,14 +375,103 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
 
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"Patrick"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
 
 
 
@@ -986,4 +542,4 @@ var _hmt = _hmt || [];
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
