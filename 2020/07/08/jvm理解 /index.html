@@ -4,27 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>如何提高linux服务器安全性 | PatrickYoung Blog</title>
+    <title>JVM理解 | PatrickYoung Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Young">
     
 
     
-    <meta name="description" content="服务器遭到远程连接暴力破解,当时可以采取哪些紧急措施,后续又应该如何加强安全性">
-<meta name="keywords" content="linux">
+    <meta name="description" content="JVM加载class文件  当AppClassLoader加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器ExtClassLoader去完成。 当ExtClassLoader加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader去完成。 如果BootStrapClassLoader加载失败（例如在">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何提高linux服务器安全性">
-<meta property="og:url" content="https://small5.github.io/2020/03/11/如何提高linux服务器安全性/index.html">
+<meta property="og:title" content="JVM理解">
+<meta property="og:url" content="https://small5.github.io/2020/07/08/jvm理解 /index.html">
 <meta property="og:site_name" content="PatrickYoung Blog">
-<meta property="og:description" content="服务器遭到远程连接暴力破解,当时可以采取哪些紧急措施,后续又应该如何加强安全性">
+<meta property="og:description" content="JVM加载class文件  当AppClassLoader加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器ExtClassLoader去完成。 当ExtClassLoader加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader去完成。 如果BootStrapClassLoader加载失败（例如在">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://small5.github.io/2020/03/11/如何提高linux服务器安全性/linux_1.jpg">
-<meta property="og:updated_time" content="2020-03-11T08:49:02.000Z">
+<meta property="og:updated_time" content="2020-08-01T02:51:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何提高linux服务器安全性">
-<meta name="twitter:description" content="服务器遭到远程连接暴力破解,当时可以采取哪些紧急措施,后续又应该如何加强安全性">
-<meta name="twitter:image" content="https://small5.github.io/2020/03/11/如何提高linux服务器安全性/linux_1.jpg">
+<meta name="twitter:title" content="JVM理解">
+<meta name="twitter:description" content="JVM加载class文件  当AppClassLoader加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器ExtClassLoader去完成。 当ExtClassLoader加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader去完成。 如果BootStrapClassLoader加载失败（例如在">
 
     
     <link rel="alternative" href="https://github.com/Small5" title="PatrickYoung Blog" type="application/atom+xml">
@@ -79,14 +77,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2020/03/11/如何提高linux服务器安全性/" title="如何提高linux服务器安全性" itemprop="url">如何提高linux服务器安全性</a>
+      <a href="/2020/07/08/jvm理解 /" title="JVM理解" itemprop="url">JVM理解</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
 		
   </p><p class="article-time">
-    <time datetime="2020-03-11T08:29:45.000Z" itemprop="datePublished"> Published 2020-03-11</time>
+    <time datetime="2020-07-08T08:29:45.000Z" itemprop="datePublished"> Published 2020-07-08</time>
     
   </p>
 </header>
@@ -99,10 +97,88 @@
 		
 		</div>
 		
-		<p>服务器遭到远程连接暴力破解,当时可以采取哪些紧急措施,后续又应该如何加强安全性<br><a id="more"></a></p>
-<div class="image-size-200"><br><img src="/2020/03/11/如何提高linux服务器安全性/linux_1.jpg" title="木马入侵通知"><br></div>
-
-
+		<p><strong>JVM加载class文件</strong></p>
+<ol>
+<li>当AppClassLoader加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器ExtClassLoader去完成。</li>
+<li>当ExtClassLoader加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader去完成。</li>
+<li>如果BootStrapClassLoader加载失败（例如在$JAVA_HOME/jre/lib里未查找到该class），会使用ExtClassLoader来尝试加载；</li>
+<li>若ExtClassLoader也加载失败，则会使用AppClassLoader来加载</li>
+<li>如果AppClassLoader也加载失败，则会报出异常ClassNotFoundException</li>
+</ol>
+<a id="more"></a>
+<p><strong>类加载详细过程</strong></p>
+<p>加载器加载到jvm中，接下来其实又分了好几个步骤：</p>
+<ul>
+<li>加载，查找并加载类的二进制数据，在Java堆中也创建一个java.lang.Class类的对象。</li>
+<li>连接，连接又包含三块内容：验证、准备、初始化。<br>  1）验证，文件格式、元数据、字节码、符号引用验证；<br>  2）准备，为类的静态变量分配内存，并将其初始化为默认值；<br>  3）解析，把类中的符号引用转换为直接引用。</li>
+<li>初始化，为类的静态变量赋予正确的初始值。</li>
+</ul>
+<p><strong>JIT即时编辑器</strong></p>
+<p>一般我们可能会想：JVM在加载了这些class文件以后，针对这些字节码，<strong>逐条取出，逐条执行–&gt;解析器解析</strong>。<br>但如果是这样的话，那就太慢了！</p>
+<p>我们的JVM是这样实现的：</p>
+<blockquote>
+<p>就是把这些Java字节码<strong>重新编译优化</strong>，生成机器码，让CPU直接执行。这样编出来的代码效率会更高。<br>编译也是要花费时间的，我们一般对<strong>热点代码</strong>做编译，<strong>非热点代码直接解析</strong>就好了。</p>
+</blockquote>
+<p>使用热点探测来检测是否为热点代码，热点探测有两种方式：</p>
+<ul>
+<li>采样</li>
+<li>计数器  </li>
+</ul>
+<p>目前HotSpot使用的是计数器的方式，它为每个方法准备了两类计数器：</p>
+<ul>
+<li>方法调用计数器（Invocation Counter）</li>
+<li>回边计数器（Back EdgeCounter）。</li>
+</ul>
+<p>在确定虚拟机运行参数的前提下，这两个计数器都有一个确定的阈值，<strong>当计数器超过阈值溢出了，就会触发JIT编译</strong>。</p>
+<p><strong>JVM的内存结构</strong> </p>
+<ul>
+<li>堆：存放对象实例，几乎所有的对象实例都在这里分配内存</li>
+<li>虚拟机栈：虚拟机栈描述的是Java方法执行的内存结构：每个方法被执行的时候都会同时创建一个栈帧（Stack Frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息</li>
+<li>本地方法栈：本地方法栈则是为虚拟机使用到的Native方法服务。</li>
+<li>方法区：存储已被虚拟机加载的类元数据信息(元空间)</li>
+<li>程序计数器：当前线程所执行的字节码的行号指示器</li>
+</ul>
+<p><strong>常量池</strong></p>
+<blockquote>
+<p>常量池（Constant PoolTable），用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后进入方法区的运行时常量池中存放</p>
+</blockquote>
+<p>常量池存储的是：</p>
+<ul>
+<li>字面量(Literal)：文本字符串等—-&gt;用双引号引起来的字符串字面量都会进这里面</li>
+<li>符号引用(Symbolic References)</li>
+<li>类和接口的全限定名(Full Qualified Name)</li>
+<li>字段的名称和描述符(Descriptor)</li>
+<li>方法的名称和描述符  </li>
+</ul>
+<p>运行时常量池只是换了一个位置(原本来方法区，现在在堆中),但可以明确的是：<strong>类加载后，常量池中的数据会在运行时常量池中存放</strong>  </p>
+<p>字符串常量池：</p>
+<blockquote>
+<p>HotSpot VM里，记录interned string的一个全局表叫做StringTable，它本质上就是个HashSet。注意它只存储对java.lang.String实例的引用，而不存储String对象的内容。</p>
+</blockquote>
+<p>即<strong>字符串常量池只存储引用，不存储内容</strong>。<br>intern方法：</p>
+<ul>
+<li>如果常量池中存在当前字符串，那么直接返回常量池中它的引用。</li>
+<li>如果常量池中没有此字符串, 会将此字符串引用保存到常量池中后, 再直接返回该字符串的引用！</li>
+</ul>
+<p><strong>GC垃圾回收</strong><br><strong>回收算法</strong></p>
+<ul>
+<li>标记-清除算法</li>
+<li>复制算法</li>
+<li>标记-整理算法</li>
+<li>分代收集算法</li>
+</ul>
+<p>垃圾收集算法只能算是方法论，落地实现的是<strong>垃圾收集器</strong>：</p>
+<ul>
+<li>Serial收集器</li>
+<li>ParNew收集器</li>
+<li>Parallel Scavenge收集器</li>
+<li>Serial Old收集器</li>
+<li>Parallel Old收集器</li>
+<li>CMS收集器</li>
+<li>G1收集器  </li>
+</ul>
+<p>实际中大部分收集器是可以互相组合使用的  </p>
+<p><strong>JVM参数与调优</strong><br>做过JavaWeb项目(ssh/ssm)，遇到过OutOfMemory这样的错误。一般解决起来也很方便，在启动的时候加个参数就行了。内存的分配的大小，使用收集器，这些都可以由我们根据需求，现实情况来指定。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -111,7 +187,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/linux/">linux</a>
+  <span></span> <a href="/tags/java/">java</a>
   </div>
 
 </div>
@@ -120,7 +196,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://small5.github.io/2020/03/11/如何提高linux服务器安全性/" data-title="如何提高linux服务器安全性 | PatrickYoung Blog" data-tsina="" class="share clearfix">
+	  <div data-url="https://small5.github.io/2020/07/08/jvm理解 /" data-title="JVM理解 | PatrickYoung Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -133,20 +209,20 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev">
- <a href="/2020/03/16/实验计划/" title="对对的实验计划">
-  <strong>上一篇：</strong><br>
-  <span>
-  对对的实验计划</span>
+
+<div class="next">
+<a href="/2020/07/07/Mybatis理解/" title="Mybatis实践理解">
+ <strong>下一篇：</strong><br> 
+ <span>Mybatis实践理解
+</span>
 </a>
 </div>
-
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2020/03/11/如何提高linux服务器安全性/" data-title="如何提高linux服务器安全性" data-url="https://small5.github.io/2020/03/11/如何提高linux服务器安全性/"></div>
+	<div class="ds-thread" data-thread-key="2020/07/08/jvm理解 /" data-title="JVM理解" data-url="https://small5.github.io/2020/07/08/jvm理解 /"></div>
 </section>
 
 
