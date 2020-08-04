@@ -77,6 +77,81 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2020/07/09/关于xrdp远程蓝屏和启动失败问题/" title="关于xrdp远程蓝屏和启动失败问题" itemprop="url">关于xrdp远程蓝屏和启动失败问题</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
+		
+  </p><p class="article-time">
+    <time datetime="2020-07-09T08:29:45.000Z" itemprop="datePublished"> Published 2020-07-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在我们使用xrdp远程连接linux系统时，可能会遇到输入账号密码的时候，长时间蓝屏显示，随后显示错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connection problem,giving up</span><br><span class="line">some problem</span><br></pre></td></tr></table></figure>
+<p>1.在查看日志后，似乎xRDP的xorgxrdp组件未按预期工作。在执行xRDP软件包的安装的时候，我们注意到控制台中显示的信息中提到需要xorgxrdp软件包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu_server18_04:/home/medical_information# sudo apt-get install xrdp</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading state information... Done</span><br><span class="line">Suggested packages:</span><br><span class="line">  guacamole xrdp-pulseaudio-installer</span><br><span class="line">Recommended packages:</span><br><span class="line">  xorgxrdp //这里建议安装xorgxrdp组件</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  xrdp</span><br><span class="line">0 upgraded, 1 newly installed, 0 to remove and 37 not upgraded.</span><br></pre></td></tr></table></figure>
+<p>2.于是我们再安装xorgxrdp， 这时会提示需要安装两个依赖包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xorgxrdp : Depends: xorg-video-abi-24</span><br><span class="line">            Depends: xserver-xorg-core-hwe-18.04 (&gt;= 2:1.18.99.901) but it is not going to be installed</span><br></pre></td></tr></table></figure></p>
+<p>3.需要我们手动安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install xorg-video-abi-24</span><br><span class="line">sudo apt-get install xserver-xorg-core-hwe-18.04</span><br></pre></td></tr></table></figure>
+<p>4.继续安装xorgxrdp:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install xorgxrdp</span><br></pre></td></tr></table></figure>
+<p>5.重启xrdp即可解决连接蓝屏问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service xrdp restart</span><br></pre></td></tr></table></figure>
+<p>另一个问题，在我卸载xrdp后重新安装时无法启动，因为安装xrdp时会自动启动，所以在安装时就显示了错误如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">● xrdp.service - xrdp daemon</span><br><span class="line">   Loaded: loaded (/lib/systemd/system/xrdp.service; disabled; vendor preset: enabled)</span><br><span class="line">   Active: failed (Result: exit-code) since Tue 2020-08-04 01:16:40 UTC; 12min ago</span><br><span class="line">     Docs: man:xrdp(8)</span><br><span class="line">           man:xrdp.ini(5)</span><br><span class="line"> Main PID: 2134 (code=exited, status=0/SUCCESS)</span><br><span class="line"></span><br><span class="line">Aug 04 01:16:40 ubuntu_server18_04 systemd[1]: Starting xrdp daemon...</span><br><span class="line">Aug 04 01:16:40 ubuntu_server18_04 xrdp[17448]: (17448)(140181056251712)[DEBUG] Testing if xrdp can listen on 0.0.0.0 port 3389.</span><br><span class="line">Aug 04 01:16:40 ubuntu_server18_04 xrdp[17448]: (17448)(140181056251712)[ERROR] g_tcp_bind(7, 3389) failed bind IPv6 (errno=98) and IPv4 (errno=22).</span><br><span class="line">Aug 04 01:16:40 ubuntu_server18_04 xrdp[17448]: (17448)(140181056251712)[DEBUG] Closed socket 7 (AF_INET6 :: port 0)</span><br><span class="line">Aug 04 01:16:40 ubuntu_server18_04 xrdp[17448]: (17448)(140181056251712)[ERROR] Failed to start xrdp daemon, possibly address already in use.</span><br><span class="line">Aug 04 01:16:40 ubuntu_server18_04 systemd[1]: xrdp.service: Control process exited, code=exited status=1</span><br><span class="line">Aug 04 01:16:40 ubuntu_server18_04 systemd[1]: xrdp.service: Failed with result &apos;exit-code&apos;.</span><br><span class="line">Aug 04 01:16:40 ubuntu_server18_04 systemd[1]: Stopped xrdp daemon.</span><br></pre></td></tr></table></figure></p>
+<p>问题显示，xrdp-sesman绑定端口3389错误，xrdp监听错误，端口可能正在使用中。百度没有查到解决方案，google检索发现是因为禁用ipv6导致的，但是我没有做过此类操作，查看配置文件也是没有更改ipv6属性的。<br>于是我在卸载xrdp之后查看进程情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove xrdp</span><br><span class="line">lsof -i</span><br></pre></td></tr></table></figure></p>
+<p>发现xrdp进程依旧存在并占用了3389端口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xrdp      28081                xrdp   11u  IPv6 811797      0t0  TCP *:3389 (LISTEN)</span><br></pre></td></tr></table></figure>
+<p>于是我kill掉了相关进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill 28081</span><br></pre></td></tr></table></figure>
+<p>再安装xrdp，成功启动。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2020/07/09/关于xrdp远程蓝屏和启动失败问题/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/07/09/关于xrdp远程蓝屏和启动失败问题/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2020/07/08/jvm理解 /" title="JVM理解" itemprop="url">JVM理解</a>
   </h1>
   <p class="article-author">By
@@ -526,15 +601,15 @@
     <div class="article-content">
         
         <h3 id="嗨皮用"><a href="#嗨皮用" class="headerlink" title="嗨皮用"></a><strong>嗨皮用</strong></h3>
-    <div id="aplayer-ccMPyaze" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="5232474" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
+    <div id="aplayer-rzHzbjoN" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="5232474" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
 <h3 id="呼呼用"><a href="#呼呼用" class="headerlink" title="呼呼用"></a><strong>呼呼用</strong></h3>
-    <div id="aplayer-PsKBaViB" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="16411018" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
+    <div id="aplayer-agonsMhN" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="16411018" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
 <hr>
 <h3 id="发呆用"><a href="#发呆用" class="headerlink" title="发呆用"></a><strong>发呆用</strong></h3>
-    <div id="aplayer-HLYEhfrB" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1319472837" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
+    <div id="aplayer-ZFTSaJVv" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1319472837" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
 <hr>
 <h3 id="读书用"><a href="#读书用" class="headerlink" title="读书用"></a><strong>读书用</strong></h3>
-    <div id="aplayer-xDCFWmdu" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1391792576" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
+    <div id="aplayer-aQiJgaay" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1391792576" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
 
         
         
@@ -635,65 +710,10 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/03/11/如何提高linux服务器安全性/" title="如何提高linux服务器安全性" itemprop="url">如何提高linux服务器安全性</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
-		
-  </p><p class="article-time">
-    <time datetime="2020-03-11T08:29:45.000Z" itemprop="datePublished"> Published 2020-03-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>服务器遭到远程连接暴力破解,当时可以采取哪些紧急措施,后续又应该如何加强安全性<br>
-        
-        
-        </p><p class="article-more-link">
-          
-            <a href="/2020/03/11/如何提高linux服务器安全性/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/linux/">linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2020/03/11/如何提高linux服务器安全性/#comments" class="ds-thread-count comments-count-link" data-thread-key="2020/03/11/如何提高linux服务器安全性/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
+  <nav id="page-nav" class="clearfix">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+  </nav>
 
 </div>
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
@@ -719,7 +739,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/语言学习/" title="语言学习">语言学习<sup>1</sup></a></li>
+				<li><a href="/tags/linux/" title="linux">linux<sup>2</sup></a></li>
 			
 		
 			
@@ -727,11 +747,15 @@
 			
 		
 			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+				<li><a href="/tags/NoSQL/" title="NoSQL">NoSQL<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/NoSQL/" title="NoSQL">NoSQL<sup>1</sup></a></li>
+				<li><a href="/tags/语言学习/" title="语言学习">语言学习<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>1</sup></a></li>
 			
 		
 			
@@ -739,7 +763,7 @@
 			
 		
 			
-				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
 			
 		
 			
@@ -748,10 +772,6 @@
 		
 			
 				<li><a href="/tags/Javaweb/" title="Javaweb">Javaweb<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
 			
 		
 			
@@ -765,7 +785,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">Archives</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">4</span></li></ul>
   </div>
 
 
