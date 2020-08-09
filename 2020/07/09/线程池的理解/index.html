@@ -4,25 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>Mindfulness For Fan | PatrickYoung Blog</title>
+    <title>线程的使用 | PatrickYoung Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Young">
     
 
     
-    <meta name="description" content="嗨皮用      呼呼用       发呆用       读书用">
-<meta name="keywords" content="专注大脑">
+    <meta name="description" content="频繁地创建和销毁线程会大大降低系统的效率，有一个办法可以使得线程可以复用，即线程完成一个任务，并不会被销毁，而是可以执行其他的任务，这个方法就是线程池。">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mindfulness For Fan">
-<meta property="og:url" content="https://small5.github.io/2020/03/16/Mindfulness/index.html">
+<meta property="og:title" content="线程的使用">
+<meta property="og:url" content="https://small5.github.io/2020/07/09/线程池的理解/index.html">
 <meta property="og:site_name" content="PatrickYoung Blog">
-<meta property="og:description" content="嗨皮用      呼呼用       发呆用       读书用">
+<meta property="og:description" content="频繁地创建和销毁线程会大大降低系统的效率，有一个办法可以使得线程可以复用，即线程完成一个任务，并不会被销毁，而是可以执行其他的任务，这个方法就是线程池。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-03-16T14:13:52.000Z">
+<meta property="og:updated_time" content="2020-08-09T12:20:05.039Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mindfulness For Fan">
-<meta name="twitter:description" content="嗨皮用      呼呼用       发呆用       读书用">
+<meta name="twitter:title" content="线程的使用">
+<meta name="twitter:description" content="频繁地创建和销毁线程会大大降低系统的效率，有一个办法可以使得线程可以复用，即线程完成一个任务，并不会被销毁，而是可以执行其他的任务，这个方法就是线程池。">
 
     
     <link rel="alternative" href="https://github.com/Small5" title="PatrickYoung Blog" type="application/atom+xml">
@@ -32,9 +32,6 @@
     
     
     <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/assets/css/APlayer.min.css" class="aplayer-style-marker">
-<script src="/assets/js/APlayer.min.js" class="aplayer-script-marker"></script>
-<script src="/assets/js/Meting.min.js" class="meting-script-marker"></script>
 </head>
 </html>
   <body>
@@ -80,29 +77,75 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2020/03/16/Mindfulness/" title="Mindfulness For Fan" itemprop="url">Mindfulness For Fan</a>
+      <a href="/2020/07/09/线程池的理解/" title="线程的使用" itemprop="url">线程的使用</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
 		
   </p><p class="article-time">
-    <time datetime="2020-03-16T14:13:28.000Z" itemprop="datePublished"> Published 2020-03-16</time>
+    <time datetime="2020-07-09T08:29:45.000Z" itemprop="datePublished"> Published 2020-07-09</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<h3 id="嗨皮用"><a href="#嗨皮用" class="headerlink" title="嗨皮用"></a><strong>嗨皮用</strong></h3>
-    <div id="aplayer-dPstaPFB" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="5232474" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
-<h3 id="呼呼用"><a href="#呼呼用" class="headerlink" title="呼呼用"></a><strong>呼呼用</strong></h3>
-    <div id="aplayer-QBEvQEJw" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="16411018" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
-<hr>
-<h3 id="发呆用"><a href="#发呆用" class="headerlink" title="发呆用"></a><strong>发呆用</strong></h3>
-    <div id="aplayer-JLRgwGxG" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1319472837" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
-<hr>
-<h3 id="读书用"><a href="#读书用" class="headerlink" title="读书用"></a><strong>读书用</strong></h3>
-    <div id="aplayer-kZrBLpmV" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1391792576" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div>
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			
+		
+		</div>
+		
+		<p>频繁地创建和销毁线程会大大降低系统的效率，有一个办法可以使得线程可以复用，即线程完成一个任务，并不会被销毁，而是可以执行其他的任务，这个方法就是线程池。<br><a id="more"></a><br>下面详解Java线程池，从核心的ThreadPoolExecutor讲其实现原理，使用介绍示例，以及如何配置参数。</p>
+<p><strong>ThreadPoolExecutor类</strong><br>我们首先了解一下线程池的好处之后，再去从学习了解它，知其好，然知其内。<br>线程池的好处主要有三个方面：</p>
+<ul>
+<li>重用已经存在的线程，减少线程的创建和销毁的开销。</li>
+<li>效控制最大并发的线程数，避免过多的竞争。</li>
+<li>提供定时定期等执行方式，很好地控制线程。  </li>
+</ul>
+<p>我们了解实现线程池的方法有四种：</p>
+<ul>
+<li>fixedThreadPool() //固定线程数</li>
+<li>CachedThreadPoll() //按需分配</li>
+<li>ScheduledThreadPoolExcutor() //定时定期执行任务</li>
+<li>ThreadPoolExcutor() //指定线程数</li>
+</ul>
+<p>实际上，阅读源码可以看出，前三类创建线程池的方法都是返回的ThreadPoolExcutor()的构造实例，只是构造参数不同而已，所以接下来我们只通过对ThreadPoolExcutor()类的解读来了解所有线程池的创建方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class ThreadPoolExecutor extends AbstractExecutorService &#123;</span><br><span class="line">    public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue) &#123;</span><br><span class="line">        this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, Executors.defaultThreadFactory(), defaultHandler);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue, ThreadFactory threadFactory) &#123;</span><br><span class="line">        this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory, defaultHandler);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue, RejectedExecutionHandler handler) &#123;</span><br><span class="line">        this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, Executors.defaultThreadFactory(), handler);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue, ThreadFactory threadFactory, RejectedExecutionHandler handler);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ThreadPoolExcutor()继承AbstractExcutorService，提供四个构造函数，前三个都是基于第四个修改参数进行的初始化工作。下面就讲讲各个参数的作用：</p>
+<ul>
+<li>corePoolSize: 核心池的大小</li>
+<li>maximumPoolSize: 线程池最大线程数</li>
+<li>keepAliveTime: 非核心线程无任务执行时最长保持时间</li>
+<li>unit: keepAliveTime的时间单位</li>
+<li>workQueue: 用来存储待执行任务的阻塞队列</li>
+<li>threadFactory: 用来创建线程的线程工厂</li>
+<li>handler: 拒绝处理任务时的策略</li>
+</ul>
+<p>具体场景配置可阅读<a href="https://blog.csdn.net/fenglllle/article/details/82790242" target="_blank" rel="noopener">博客</a></p>
+<p><strong>线程的五种状态</strong><br>1.New (新创建)</p>
+<p>当用new操作符创建一个线程时，如new Thread®，该线程还没有开始运行。这意外这它的状态是new。此时程序还没有开始运行线程中的代码，在线程运行之前还有一些基础工作要做。</p>
+<p>2.Runnable (可运行/就绪)</p>
+<p>一个新创建的线程并不自动开始运行，要执行线程，必须调用线程的start()方法。当线程对象调用start()方法即启动了线程，start()方法创建线程运行的系统资源，并调度线程运行run()方法。当start()方法返回后，线程就处于就绪状态。</p>
+<p>处于就绪状态的线程并不一定立即运行run()方法，线程还必须同其他线程竞争CPU时间，只有获得CPU时间才可以运行线程。因为在单CPU的计算机系统中，不可能同时运行多个线程，一个时刻仅有一个线程处于运行状态。因此此时可能有多个线程处于就绪状态。对多个处于就绪状态的线程是由Java运行时系统的线程调度程序来调度的。</p>
+<p>3.Running (运行中)</p>
+<p>当线程获得CPU时间片，线程就进入Running状态(如图中的2所示)。<br>处于Running状态的线程有可能在运行中CPU时间片用完，而run方法没运行完，线程就又进入Runnable状态。<br>通常情况下，运行中的线程一直处于Running与Runnable交替转换的过程中。<br>　　<br>4.Blocked (等待/阻塞/睡眠)</p>
+<p>当线程在Running状态中，遇到阻塞等待锁、等待用户输入、调用sleep()方法、调用join等待其他线程情况，会导致线程进入阻塞状态(Blocked)。<br>处于阻塞状态的线程，在阻塞等待结束之后，会进入Runnable状态，等等获得CPU时间片继续运行程序。</p>
+<p>线程运行过程中，可能由于各种原因进入阻塞状态：</p>
+<p>线程通过调用sleep方法进入睡眠状态；<br>线程调用一个在I/O上被阻塞的操作，即该操作在输入输出操作完成之前不会返回到它的调用者；<br>线程试图得到一个锁，而该锁正被其他线程持有；<br>线程在等待某个触发条件；<br>5.Dead (死亡)</p>
+<p>有两个原因会导致线程死亡：</p>
+<p>run方法正常退出而自然死亡；<br>一个未捕获的异常终止了run方法而使线程猝死；<br>为了确定线程在当前是否存活着（就是要么是可运行的，要么是被阻塞了），需要使用isAlive方法，如果是可运行或被阻塞，这个方法返回true；如果线程仍旧是new状态且不是可运行的，或者线程死亡了，则返回false。</p>
+<p><strong>线程池的五种状态</strong><br>1.RUNNING</p>
+<p>状态说明：线程池处在RUNNING状态时，能够接收新任务，以及对已添加的任务进行处理。<br>状态切换：线程池的初始化状态是RUNNING。换句话说，线程池被一旦被创建，就处于RUNNING状态，并且线程池中的任务数为0！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));</span><br></pre></td></tr></table></figure>
+<p>2.SHUTDOWN</p>
+<p>状态说明：线程池处在SHUTDOWN状态时，不接收新任务，但能处理已添加的任务。<br>状态切换：调用线程池的shutdown()接口时，线程池由RUNNING -&gt; SHUTDOWN。</p>
+<p>3.STOP</p>
+<p>状态说明：线程池处在STOP状态时，不接收新任务，不处理已添加的任务，并且会中断正在处理的任务。<br>状态切换：调用线程池的shutdownNow()接口时，线程池由(RUNNING or SHUTDOWN ) -&gt; STOP。</p>
+<p>4.TIDYING</p>
+<p>状态说明：当所有的任务已终止，ctl记录的”任务数量”为0，线程池会变为TIDYING状态。当线程池变为TIDYING状态时，会执行钩子函数terminated()。terminated()在ThreadPoolExecutor类中是空的，若用户想在线程池变为TIDYING时，进行相应的处理；可以通过重载terminated()函数来实现。<br>状态切换：当线程池在SHUTDOWN状态下，阻塞队列为空并且线程池中执行的任务也为空时，就会由 SHUTDOWN -&gt; TIDYING。<br>当线程池在STOP状态下，线程池中执行的任务为空时，就会由STOP -&gt; TIDYING。<br>5.TERMINATED</p>
+<p>状态说明：线程池彻底终止，就变成TERMINATED状态。<br>状态切换：线程池处在TIDYING状态时，执行完terminated()之后，就会由 TIDYING -&gt; TERMINATED。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -111,7 +154,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/专注大脑/">专注大脑</a>
+  <span></span> <a href="/tags/java/">java</a>
   </div>
 
 </div>
@@ -120,7 +163,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://small5.github.io/2020/03/16/Mindfulness/" data-title="Mindfulness For Fan | PatrickYoung Blog" data-tsina="" class="share clearfix">
+	  <div data-url="https://small5.github.io/2020/07/09/线程池的理解/" data-title="线程的使用 | PatrickYoung Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -133,19 +176,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev">
- <a href="/2020/03/24/码农计划/" title="对对的码农计划(日更)">
-  <strong>上一篇：</strong><br>
-  <span>
-  对对的码农计划(日更)</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2020/03/16/实验计划/" title="对对的实验计划">
+<a href="/2020/07/09/关于xrdp远程蓝屏和启动失败问题/" title="关于xrdp远程蓝屏和启动失败问题">
  <strong>下一篇：</strong><br> 
- <span>对对的实验计划
+ <span>关于xrdp远程蓝屏和启动失败问题
 </span>
 </a>
 </div>
@@ -154,7 +189,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2020/03/16/Mindfulness/" data-title="Mindfulness For Fan" data-url="https://small5.github.io/2020/03/16/Mindfulness/"></div>
+	<div class="ds-thread" data-thread-key="2020/07/09/线程池的理解/" data-title="线程的使用" data-url="https://small5.github.io/2020/07/09/线程池的理解/"></div>
 </section>
 
 
@@ -162,6 +197,13 @@
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ 
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
@@ -324,6 +366,8 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
