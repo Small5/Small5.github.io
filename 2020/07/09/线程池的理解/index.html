@@ -4,7 +4,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>线程的使用 | PatrickYoung Blog</title>
+    <title>线程与线程池 | PatrickYoung Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Young">
@@ -14,14 +14,14 @@
     <meta name="description" content="频繁地创建和销毁线程会大大降低系统的效率，有一个办法可以使得线程可以复用，即线程完成一个任务，并不会被销毁，而是可以执行其他的任务，这个方法就是线程池。">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程的使用">
+<meta property="og:title" content="线程与线程池">
 <meta property="og:url" content="https://small5.github.io/2020/07/09/线程池的理解/index.html">
 <meta property="og:site_name" content="PatrickYoung Blog">
 <meta property="og:description" content="频繁地创建和销毁线程会大大降低系统的效率，有一个办法可以使得线程可以复用，即线程完成一个任务，并不会被销毁，而是可以执行其他的任务，这个方法就是线程池。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-08-09T12:20:05.039Z">
+<meta property="og:updated_time" content="2020-08-09T12:24:30.263Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线程的使用">
+<meta name="twitter:title" content="线程与线程池">
 <meta name="twitter:description" content="频繁地创建和销毁线程会大大降低系统的效率，有一个办法可以使得线程可以复用，即线程完成一个任务，并不会被销毁，而是可以执行其他的任务，这个方法就是线程池。">
 
     
@@ -77,7 +77,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2020/07/09/线程池的理解/" title="线程的使用" itemprop="url">线程的使用</a>
+      <a href="/2020/07/09/线程池的理解/" title="线程与线程池" itemprop="url">线程与线程池</a>
   </h1>
   <p class="article-author">By
        
@@ -163,7 +163,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://small5.github.io/2020/07/09/线程池的理解/" data-title="线程的使用 | PatrickYoung Blog" data-tsina="" class="share clearfix">
+	  <div data-url="https://small5.github.io/2020/07/09/线程池的理解/" data-title="线程与线程池 | PatrickYoung Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -176,11 +176,19 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev">
+ <a href="/2020/07/09/关于xrdp远程蓝屏和启动失败问题/" title="关于xrdp远程蓝屏和启动失败问题">
+  <strong>上一篇：</strong><br>
+  <span>
+  关于xrdp远程蓝屏和启动失败问题</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/2020/07/09/关于xrdp远程蓝屏和启动失败问题/" title="关于xrdp远程蓝屏和启动失败问题">
+<a href="/2020/07/08/jvm理解 /" title="JVM理解">
  <strong>下一篇：</strong><br> 
- <span>关于xrdp远程蓝屏和启动失败问题
+ <span>JVM理解
 </span>
 </a>
 </div>
@@ -189,7 +197,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2020/07/09/线程池的理解/" data-title="线程的使用" data-url="https://small5.github.io/2020/07/09/线程池的理解/"></div>
+	<div class="ds-thread" data-thread-key="2020/07/09/线程池的理解/" data-title="线程与线程池" data-url="https://small5.github.io/2020/07/09/线程池的理解/"></div>
 </section>
 
 
@@ -226,11 +234,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
+				<li><a href="/tags/linux/" title="linux">linux<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/linux/" title="linux">linux<sup>2</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
 			
 		
 			
@@ -250,19 +258,19 @@
 			
 		
 			
-				<li><a href="/tags/科研/" title="科研">科研<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Redis/" title="Redis">Redis<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Javaweb/" title="Javaweb">Javaweb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/科研/" title="科研">科研<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
 			
 		
 		</ul>
