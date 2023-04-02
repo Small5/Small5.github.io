@@ -4,24 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>PatrickYoung Blog</title>
+    <title>回调函数学习 | PatrickYoung Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Young">
     
 
     
-    <meta name="description" content="#typora-sidebar, body {     background-color: #fffffc; }  #typora-sidebar, h1, h2, h3 {     font-family: &apos;Futura&apos;, sans-serif; }  body {     font-family: &apos;Palatino&apos;, serif;     padding: 4em;     margi">
+    <meta name="description" content="回调函数原理 C++, being a strongly-typed object-orientated language, makes callbacks a tricker subject to deal with than say, in C (non-object orientated) or Javascript (object orientated but NOT strongly t">
+<meta name="keywords" content="C++学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PatrickYoung Blog">
-<meta property="og:url" content="https://small5.github.io/2020/06/30/interface/index.html">
+<meta property="og:title" content="回调函数学习">
+<meta property="og:url" content="https://small5.github.io/2023/02/01/回调函数学习/index.html">
 <meta property="og:site_name" content="PatrickYoung Blog">
-<meta property="og:description" content="#typora-sidebar, body {     background-color: #fffffc; }  #typora-sidebar, h1, h2, h3 {     font-family: &apos;Futura&apos;, sans-serif; }  body {     font-family: &apos;Palatino&apos;, serif;     padding: 4em;     margi">
+<meta property="og:description" content="回调函数原理 C++, being a strongly-typed object-orientated language, makes callbacks a tricker subject to deal with than say, in C (non-object orientated) or Javascript (object orientated but NOT strongly t">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-06-09T03:39:16.000Z">
+<meta property="og:updated_time" content="2023-02-03T14:43:10.807Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PatrickYoung Blog">
-<meta name="twitter:description" content="#typora-sidebar, body {     background-color: #fffffc; }  #typora-sidebar, h1, h2, h3 {     font-family: &apos;Futura&apos;, sans-serif; }  body {     font-family: &apos;Palatino&apos;, serif;     padding: 4em;     margi">
+<meta name="twitter:title" content="回调函数学习">
+<meta name="twitter:description" content="回调函数原理 C++, being a strongly-typed object-orientated language, makes callbacks a tricker subject to deal with than say, in C (non-object orientated) or Javascript (object orientated but NOT strongly t">
 
     
     <link rel="alternative" href="https://github.com/Small5" title="PatrickYoung Blog" type="application/atom+xml">
@@ -76,14 +77,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2020/06/30/interface/" title="" itemprop="url"></a>
+      <a href="/2023/02/01/回调函数学习/" title="回调函数学习" itemprop="url">回调函数学习</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
 		
   </p><p class="article-time">
-    <time datetime="2020-06-30T13:57:51.000Z" itemprop="datePublished"> Published 2020-06-30</time>
+    <time datetime="2023-02-01T14:32:35.000Z" itemprop="datePublished"> Published 2023-02-01</time>
     
   </p>
 </header>
@@ -92,43 +93,25 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#回调函数原理"><span class="toc-number">1.</span> <span class="toc-text">回调函数原理</span></a></li></ol>
 		
 		</div>
 		
-		#typora-sidebar, body {
-    background-color: #fffffc;
-}
-
-#typora-sidebar, h1, h2, h3 {
-    font-family: 'Futura', sans-serif;
-}
-
-body {
-    font-family: 'Palatino', serif;
-    padding: 4em;
-    margin: auto;
-    max-width: 60ch;
-}
-
-h1, h2, h3, a {
-    color: #468;
-}
-
-code, pre, .md-fences, #typora-source {
-    background-color: #f6f6f6;
-    font-family: 'Victor Mono', 'Courier New', monospace;
-}
-
-blockquote {
-    border-left: 4px solid #abb;
-    padding-left: 16px;
-}
+		<h1 id="回调函数原理"><a href="#回调函数原理" class="headerlink" title="回调函数原理"></a>回调函数原理</h1><blockquote>
+<p>C++, being a strongly-typed object-orientated language, makes callbacks a tricker subject to deal with than say, in C (non-object orientated) or Javascript (object orientated but NOT strongly typed). <strong>This is especially true for embedded systems where you cannot always rely on having newer C++ standard library header files</strong> such as <code>at your disposal (it’s a mixed bag, some embedded C++ environments I’ve used do support</code>, others do not).</p>
+</blockquote>
+<p>开源案例：<a href="https://github.com/gbmhunter/MCallbacks" target="_blank" rel="noopener">https://github.com/gbmhunter/MCallbacks</a></p>
+<a id="more"></a>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/C-学习/">C++学习</a>
+  </div>
 
 </div>
 
@@ -136,7 +119,7 @@ blockquote {
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://small5.github.io/2020/06/30/interface/" data-title="PatrickYoung Blog" data-tsina="" class="share clearfix">
+	  <div data-url="https://small5.github.io/2023/02/01/回调函数学习/" data-title="回调函数学习 | PatrickYoung Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -150,18 +133,18 @@ blockquote {
 <nav class="article-nav clearfix">
  
  <div class="prev">
- <a href="/2020/06/30/README/" title="">
+ <a href="/2023/02/03/飞行目标轨迹预测/" title="目标轨迹分析">
   <strong>上一篇：</strong><br>
   <span>
-  (no title)</span>
+  目标轨迹分析</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2020/04/01/DailyLanguage/" title="【语言练习】">
+<a href="/2020/07/09/关于xrdp远程蓝屏和启动失败问题/" title="关于xrdp远程蓝屏和启动失败问题">
  <strong>下一篇：</strong><br> 
- <span>【语言练习】
+ <span>关于xrdp远程蓝屏和启动失败问题
 </span>
 </a>
 </div>
@@ -170,7 +153,7 @@ blockquote {
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2020/06/30/interface/" data-title="" data-url="https://small5.github.io/2020/06/30/interface/"></div>
+	<div class="ds-thread" data-thread-key="2023/02/01/回调函数学习/" data-title="回调函数学习" data-url="https://small5.github.io/2023/02/01/回调函数学习/"></div>
 </section>
 
 
@@ -182,7 +165,7 @@ blockquote {
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#回调函数原理"><span class="toc-number">1.</span> <span class="toc-text">回调函数原理</span></a></li></ol>
  
   </div>
 
@@ -207,6 +190,14 @@ blockquote {
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/语言学习/" title="语言学习">语言学习<sup>1</sup></a></li>
 			
 		
@@ -215,11 +206,19 @@ blockquote {
 			
 		
 			
+				<li><a href="/tags/NoSQL/" title="NoSQL">NoSQL<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Redis/" title="Redis">Redis<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+				<li><a href="/tags/SSM框架/" title="SSM框架">SSM框架<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C-学习/" title="C++学习">C++学习<sup>1</sup></a></li>
 			
 		
 			
@@ -228,6 +227,10 @@ blockquote {
 		
 			
 				<li><a href="/tags/Javaweb/" title="Javaweb">Javaweb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/论文学习「目标分析」/" title="论文学习「目标分析」">论文学习「目标分析」<sup>1</sup></a></li>
 			
 		
 			
@@ -241,7 +244,7 @@ blockquote {
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">Archives</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">4</span></li></ul>
   </div>
 
 
@@ -283,7 +286,7 @@ blockquote {
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2023 
 		
 		<a href="/about" target="_blank" title="Patrick Young">Patrick Young</a>
 		
