@@ -4,25 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>Redis安装及简要介绍 | PatrickYoung Blog</title>
+    <title>序列化和反序列化 | PatrickYoung Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Young">
     
 
     
-    <meta name="description" content="在线安装直接输入命令 sudo apt-get install redis-server 安装完成后，Redis服务器会自动启动。使用ps -aux|grep redis命令可以看到服务器系统进程默认端口6379 使用netstat -nlt|grep 6379命令可以看到redis服务器状态 使用sudo /etc/init.d/redis-server status命令可以看到Redis服务器">
-<meta name="keywords" content="Redis">
+    <meta name="description" content="在开发中，我们都知道序列化是将对象或数据结构转换为二进制序列，反序列化是二进制序列转换为对象或数据结构，最常用在需要进行通信的对象类中。通过回答三个问题去学习理解：  为什么要序列化和反序列化？  哪些场景下需要？  附加回答字节对齐、大小端对齐在（反）序列化中的运用？">
+<meta name="keywords" content="边干边学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis安装及简要介绍">
-<meta property="og:url" content="https://small5.github.io/2020/07/06/Redis安装及简要介绍/index.html">
+<meta property="og:title" content="序列化和反序列化">
+<meta property="og:url" content="https://small5.github.io/2023/05/02/serialize-deserialize/index.html">
 <meta property="og:site_name" content="PatrickYoung Blog">
-<meta property="og:description" content="在线安装直接输入命令 sudo apt-get install redis-server 安装完成后，Redis服务器会自动启动。使用ps -aux|grep redis命令可以看到服务器系统进程默认端口6379 使用netstat -nlt|grep 6379命令可以看到redis服务器状态 使用sudo /etc/init.d/redis-server status命令可以看到Redis服务器">
+<meta property="og:description" content="在开发中，我们都知道序列化是将对象或数据结构转换为二进制序列，反序列化是二进制序列转换为对象或数据结构，最常用在需要进行通信的对象类中。通过回答三个问题去学习理解：  为什么要序列化和反序列化？  哪些场景下需要？  附加回答字节对齐、大小端对齐在（反）序列化中的运用？">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-08T09:05:07.773Z">
+<meta property="og:updated_time" content="2023-05-02T13:35:29.648Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis安装及简要介绍">
-<meta name="twitter:description" content="在线安装直接输入命令 sudo apt-get install redis-server 安装完成后，Redis服务器会自动启动。使用ps -aux|grep redis命令可以看到服务器系统进程默认端口6379 使用netstat -nlt|grep 6379命令可以看到redis服务器状态 使用sudo /etc/init.d/redis-server status命令可以看到Redis服务器">
+<meta name="twitter:title" content="序列化和反序列化">
+<meta name="twitter:description" content="在开发中，我们都知道序列化是将对象或数据结构转换为二进制序列，反序列化是二进制序列转换为对象或数据结构，最常用在需要进行通信的对象类中。通过回答三个问题去学习理解：  为什么要序列化和反序列化？  哪些场景下需要？  附加回答字节对齐、大小端对齐在（反）序列化中的运用？">
 
     
     <link rel="alternative" href="https://github.com/Small5" title="PatrickYoung Blog" type="application/atom+xml">
@@ -77,14 +77,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2020/07/06/Redis安装及简要介绍/" title="Redis安装及简要介绍" itemprop="url">Redis安装及简要介绍</a>
+      <a href="/2023/05/02/serialize-deserialize/" title="序列化和反序列化" itemprop="url">序列化和反序列化</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Patrick Young" target="_blank" itemprop="author">Patrick Young</a>
 		
   </p><p class="article-time">
-    <time datetime="2020-07-06T08:29:45.000Z" itemprop="datePublished"> Published 2020-07-06</time>
+    <time datetime="2023-05-02T12:47:01.000Z" itemprop="datePublished"> Published 2023-05-02</time>
     
   </p>
 </header>
@@ -93,30 +93,29 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在线安装"><span class="toc-number">1.</span> <span class="toc-text">在线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#离线安装："><span class="toc-number">2.</span> <span class="toc-text">离线安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis服务器基本配置"><span class="toc-number">3.</span> <span class="toc-text">Redis服务器基本配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据操作"><span class="toc-number">4.</span> <span class="toc-text">数据操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#卸载redis"><span class="toc-number">5.</span> <span class="toc-text">卸载redis</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要序列化和反序列化？"><span class="toc-number">1.</span> <span class="toc-text">为什么要序列化和反序列化？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哪些场景下需要？"><span class="toc-number">2.</span> <span class="toc-text">哪些场景下需要？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字节对齐、大小端对齐"><span class="toc-number">3.</span> <span class="toc-text">字节对齐、大小端对齐</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h2><p>直接输入命令 <code>sudo apt-get install redis-server</code></p>
-<p>安装完成后，Redis服务器会自动启动。<br>使用<code>ps -aux|grep redis</code>命令可以看到服务器系统进程默认端口6379</p>
-<p>使用<code>netstat -nlt|grep 6379</code>命令可以看到redis服务器状态</p>
-<p>使用<code>sudo /etc/init.d/redis-server status</code>命令可以看到Redis服务器状态</p>
+		<p>在开发中，我们都知道序列化是将对象或数据结构转换为二进制序列，反序列化是二进制序列转换为对象或数据结构，最常用在需要进行通信的对象类中。通过回答三个问题去学习理解：</p>
+<ol>
+<li><p>为什么要序列化和反序列化？</p>
+</li>
+<li><p>哪些场景下需要？</p>
+</li>
+<li><p>附加回答字节对齐、大小端对齐在（反）序列化中的运用？</p>
 <a id="more"></a>
-<h2 id="离线安装："><a href="#离线安装：" class="headerlink" title="离线安装："></a>离线安装：</h2><p>下载：打开redis官方网站，推荐下载稳定版本(stable)</p>
-<pre><code>wget http://download.redis.io/releases/redis-5.0.5.tar.gz
-</code></pre><p>解压<code>tar xzf redis-5.0.5.tar.gz</code><br>复制：推荐放到usr/local下<code>sudo mv redis-5.0.5 /usr/local/redis</code><br>进入redis目录 <code>cd /usr/local/redis/</code><br>生成:<code>sudo make</code>，失败则 使用 <code>sudo make MALLOC=libc</code>后再<code>sudo make</code><br>测试 <code>sudo make test</code> 这段运行时间会较长<br>安装：将redis的命令安装到<code>/usr/bin/</code>目录<code>sudo make install</code><br>运行 <code>redis-server</code> 按ctrl+c停止<br>Redis安装 配置服务器 启动客户端 数据操作 发布订阅 主从配置 卸载Redis</p>
-<h2 id="Redis服务器基本配置"><a href="#Redis服务器基本配置" class="headerlink" title="Redis服务器基本配置"></a>Redis服务器基本配置</h2><p>配置文件为<em>/etc/redis/redis.conf</em>(在线安装推荐)或者 <em>/usr/local/redis/redis.conf</em>(手动安装)</p>
-<p>首先<code>sudo vi /etc/redis/redis.conf</code><br>添加Redis的访问账号<br>Redis服务器默认是不需要密码的，假设设置密码为test。<br>去掉requirepass 前面的注释#，在后面添加密码<br>requirepass hzlarm</p>
-<p>开启Redis的远程连接<br>注释掉绑定地址 #bind 127.0.0.1</p>
-<p>修改Redis的默认端口<br>port 6379</p>
-<p>Redis以守护进程运行<br>如果以守护进程运行，则不会在命令行阻塞，类似于服务<br>如果以非守护进程运行，则当前终端被阻塞，无法使用<br>推荐改为yes，以守护进程运行<br>daemonize no|yes<br>Redis的数据文件<br>dbfilename dump.rdb</p>
-<p>数据文件存储路径<br>dir /var/lib/redis</p>
-<p>配置完成后重新启动服务器<br>sudo service redis-server restart</p>
-<p>启动客户端<br>安装Redis服务器，会自动地一起安装Redis命令行客户端程序。命令行输入 <code>redis-cli</code> 如果设置了密码<code>hzlarmredis-cli -a test</code><br>常用命令： Redis命令不区分大小写<br>ping返回PONG表示畅通<br>help 命令行的帮助<br>quit 或者Ctrl+d或者Ctrl+c退出</p>
-<h2 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h2><p>redis是key-value的数据，所以每个数据都是一个键值对<br>键的类型是字符串<br>值的类型分为五种：<br>1.字符串string<br>2.哈希hash<br>3.列表list<br>4.集合set<br>5.有序集合zset</p>
-<p>string是redis最基本的类型,一个 key 对应一个 value<br>最大能存储512MB数据<br>string类型是二进制安全的，即可以为任何数据，比如数字、图片、序列化对象等<br>数据操作的全部命令，可以查看<a href="http://redis.cn/commands.html" target="_blank" rel="noopener">中文网站</a></p>
-<h2 id="卸载redis"><a href="#卸载redis" class="headerlink" title="卸载redis"></a>卸载redis</h2><p>redis这么神奇，为什么要卸载它？？？</p>
-  
+</li>
+</ol>
+<h2 id="为什么要序列化和反序列化？"><a href="#为什么要序列化和反序列化？" class="headerlink" title="为什么要序列化和反序列化？"></a>为什么要序列化和反序列化？</h2><p>常以文件保存为例来说明（反）序列化的作用：首先对于一个实例对象，即使不序列化也是可以正常保存的，但是当我们将该文件拿到其他人的电脑读取时却未必能够读取成功，原因在于我们直接保存的数据并不具有一个标准的格式。而序列化就是<strong>将数据以某种规定好的格式（例如xml格式）保存的过程，这种标准格式的数据在绝大多数情况下都能够被识别</strong>，为我们的开发过程中带来了很大的便利。</p>
+<p>最重要的作用应<strong>在于客户端和服务端之间的通信上，实现对象中数据的正确解读</strong>，在定义类或结构中重载DataStream实现序列化操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//序列化</span><br><span class="line">friend QDataStream &amp;operator&lt;&lt;(QDataStream&amp; input,const People &amp;iteam)</span><br><span class="line">&#123;</span><br><span class="line">    //vector 数据类型需要用vector&lt;People&gt;::fromStdVector 转一下</span><br><span class="line">    //如果是QList则不需要直接插入</span><br><span class="line">    QVector&lt;QString&gt; strvecfamily = QVector&lt;QString&gt;::fromStdVector(iteam.vecfamily);</span><br><span class="line">    input &lt;&lt; iteam.age &lt;&lt; iteam.dBody.height &lt;&lt; iteam.dBody.weight\</span><br><span class="line">          &lt;&lt; strvecfamily;</span><br><span class="line">    return input;</span><br><span class="line">&#125;</span><br><span class="line">//反序列化</span><br><span class="line">friend QDataStream &amp;operator&gt;&gt;(QDataStream&amp; output,People&amp; iteam)</span><br><span class="line">&#123;</span><br><span class="line">    QVector&lt;QString&gt; vecfamily;</span><br><span class="line">    output &gt;&gt; iteam.age &gt;&gt;iteam.dBody.height &gt;&gt; iteam.dBody.weight &gt;&gt; vecfamily;</span><br><span class="line">    iteam.vecfamily = vecfamily.toStdVector();</span><br><span class="line">    return output;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>总之，序列化就是将对象实例的状态转换为可保持或传输的格式的过程，而反序列化是依据流重构对象。</strong></p>
+<h2 id="哪些场景下需要？"><a href="#哪些场景下需要？" class="headerlink" title="哪些场景下需要？"></a>哪些场景下需要？</h2><ul>
+<li>（保持）将对象存储于硬盘上，便于以后反序列化使用</li>
+<li>（传输）在网络上传送对象的字节序列</li>
+</ul>
+<h2 id="字节对齐、大小端对齐"><a href="#字节对齐、大小端对齐" class="headerlink" title="字节对齐、大小端对齐"></a>字节对齐、大小端对齐</h2>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -124,7 +123,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Redis/">Redis</a>
+  <span></span> <a href="/tags/边干边学/">边干边学</a>
   </div>
 
 </div>
@@ -133,7 +132,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://small5.github.io/2020/07/06/Redis安装及简要介绍/" data-title="Redis安装及简要介绍 | PatrickYoung Blog" data-tsina="" class="share clearfix">
+	  <div data-url="https://small5.github.io/2023/05/02/serialize-deserialize/" data-title="序列化和反序列化 | PatrickYoung Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -146,19 +145,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev">
- <a href="/2020/07/06/MongoDB安装及远程连接/" title="ubuntu18.04安装MongoDB并使用compass远程连接">
-  <strong>上一篇：</strong><br>
-  <span>
-  ubuntu18.04安装MongoDB并使用compass远程连接</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2020/07/06/流域可持续发展项目回顾/" title="hhs项目复习">
+<a href="/2023/03/23/《从零开始的女性主义》读后感一/" title="《从零开始的女性主义》随记一">
  <strong>下一篇：</strong><br> 
- <span>hhs项目复习
+ <span>《从零开始的女性主义》随记一
 </span>
 </a>
 </div>
@@ -167,7 +158,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2020/07/06/Redis安装及简要介绍/" data-title="Redis安装及简要介绍" data-url="https://small5.github.io/2020/07/06/Redis安装及简要介绍/"></div>
+	<div class="ds-thread" data-thread-key="2023/05/02/serialize-deserialize/" data-title="序列化和反序列化" data-url="https://small5.github.io/2023/05/02/serialize-deserialize/"></div>
 </section>
 
 
@@ -179,7 +170,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在线安装"><span class="toc-number">1.</span> <span class="toc-text">在线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#离线安装："><span class="toc-number">2.</span> <span class="toc-text">离线安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis服务器基本配置"><span class="toc-number">3.</span> <span class="toc-text">Redis服务器基本配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据操作"><span class="toc-number">4.</span> <span class="toc-text">数据操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#卸载redis"><span class="toc-number">5.</span> <span class="toc-text">卸载redis</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要序列化和反序列化？"><span class="toc-number">1.</span> <span class="toc-text">为什么要序列化和反序列化？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哪些场景下需要？"><span class="toc-number">2.</span> <span class="toc-text">哪些场景下需要？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字节对齐、大小端对齐"><span class="toc-number">3.</span> <span class="toc-text">字节对齐、大小端对齐</span></a></li></ol>
  
   </div>
 
